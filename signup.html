@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Quantity Measurement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Create Account</h1>
+      <p class="auth-sub">Register to store measurement history securely.</p>
+
+      <label>Name</label>
+      <input id="name" type="text" placeholder="Your name" autocomplete="name">
+
+      <label>Email</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Create password" autocomplete="new-password">
+
+      <button id="signupBtn" class="cta" type="button">Sign Up</button>
+      <p id="authMessage" class="message"></p>
+
+      <div class="auth-links">
+        <a href="login.html">Already have an account</a>
+        <a href="index.html">Back to app</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/signup.js"></script>
+</body>
+</html>

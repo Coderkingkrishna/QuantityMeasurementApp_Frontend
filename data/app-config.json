@@ -1,0 +1,14 @@
+{
+  "apiBaseUrl": "https://localhost:5105",
+  "endpoints": {
+    "signup": "/api/auth/signup",
+    "login": "/api/auth/login",
+    "logout": "/api/auth/logout",
+    "convert": "/api/quantitymeasurement/convert",
+    "compare": "/api/quantitymeasurement/compare",
+    "add": "/api/quantitymeasurement/add",
+    "subtract": "/api/quantitymeasurement/subtract",
+    "divide": "/api/quantitymeasurement/divide",
+    "history": "/api/quantitymeasurement/history"
+  }
+}

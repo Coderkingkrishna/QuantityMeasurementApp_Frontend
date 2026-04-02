@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Quantity Measurement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Login</h1>
+      <p class="auth-sub">Sign in to access history and secure actions.</p>
+
+      <label>Email</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter password" autocomplete="current-password">
+
+      <button id="loginBtn" class="cta" type="button">Login</button>
+      <p id="authMessage" class="message"></p>
+
+      <div class="auth-links">
+        <a href="signup.html">Create an account</a>
+        <a href="index.html">Back to app</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/login.js"></script>
+</body>
+</html>
