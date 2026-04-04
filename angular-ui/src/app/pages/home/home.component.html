@@ -1,0 +1,161 @@
+<div class="bg-shape bg-shape-left"></div>
+<div class="bg-shape bg-shape-right"></div>
+
+<main class="container">
+  <header class="app-header">
+    <h1>Welcome To Quantity Measurement</h1>
+    <div class="auth-actions">
+      <span class="welcome-user">{{ isLoggedIn ? (userName ? 'Hi, ' + userName : 'Logged in') : '' }}</span>
+      <a *ngIf="!isLoggedIn" class="link-btn" routerLink="/login">Login</a>
+      <a *ngIf="!isLoggedIn" class="link-btn" routerLink="/signup">Sign Up</a>
+      <button *ngIf="isLoggedIn" class="link-btn" type="button" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <section class="panel">
+    <p class="label">Choose Type</p>
+    <div class="cards">
+      <button
+        *ngFor="let item of categoryMeta"
+        type="button"
+        class="card-btn"
+        [class.is-active]="item.key === category"
+        (click)="setCategory(item.key)"
+      >
+        <span>{{ item.icon }}</span>
+        <span>{{ item.key }}</span>
+      </button>
+    </div>
+
+    <p class="label">Choose Action</p>
+    <div class="tabs">
+      <button
+        *ngFor="let tab of tabs"
+        type="button"
+        class="tab"
+        [class.is-active]="tab.key === action"
+        [class.is-disabled]="isTabDisabled(tab.key)"
+        [disabled]="isTabDisabled(tab.key)"
+        (click)="setAction(tab.key)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div id="comparisonFields" class="field-grid" [class.is-hidden]="action !== 'comparison'">
+      <div>
+        <p class="sub-label">Value 1</p>
+        <div class="input-card">
+          <input type="number" [(ngModel)]="compareValue1" step="any" />
+          <select [(ngModel)]="compareUnit1">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <p class="sub-label">Value 2</p>
+        <div class="input-card">
+          <input type="number" [(ngModel)]="compareValue2" step="any" />
+          <select [(ngModel)]="compareUnit2">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="conversionFields" class="field-grid" [class.is-hidden]="action !== 'conversion'">
+      <div>
+        <p class="sub-label">From</p>
+        <div class="input-card">
+          <input type="number" [(ngModel)]="convertValue" step="any" />
+          <select [(ngModel)]="convertUnitFrom">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <p class="sub-label">To</p>
+        <div class="input-card">
+          <select [(ngModel)]="convertUnitTo">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="arithmeticFields"
+      class="field-grid"
+      [class.is-hidden]="action !== 'arithmetic'"
+      [class.compact]="shouldHideArithTargetUnit"
+    >
+      <div>
+        <p class="sub-label">Value 1</p>
+        <div class="input-card">
+          <input type="number" [(ngModel)]="arithValue1" step="any" />
+          <select [(ngModel)]="arithUnit1">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="operator-wrap">
+        <p class="sub-label">Operator</p>
+        <select class="operator-select" [(ngModel)]="arithOperator">
+          <option *ngFor="let operator of currentOperators" [value]="operator.value">
+            {{ operator.label }}
+          </option>
+        </select>
+      </div>
+
+      <div>
+        <p class="sub-label">Value 2</p>
+        <div class="input-card">
+          <input type="number" [(ngModel)]="arithValue2" step="any" />
+          <select [(ngModel)]="arithUnit2">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div [class.is-hidden]="shouldHideArithTargetUnit">
+        <p class="sub-label">Result Unit</p>
+        <div class="input-card">
+          <select [(ngModel)]="arithTargetUnit">
+            <option *ngFor="let unit of selectedUnits" [value]="unit">{{ unit }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-row">
+      <button class="cta" type="button" (click)="calculate()">Calculate</button>
+      <button class="secondary-btn" type="button" (click)="toggleHistory()">
+        {{ historyVisible ? 'Hide History' : 'View History' }}
+      </button>
+    </div>
+
+    <div class="result-card">
+      <p class="sub-label">Result</p>
+      <div class="result-text">{{ resultText }}</div>
+      <div class="result-sub-text">{{ resultSubText }}</div>
+    </div>
+
+    <section class="history-panel" [class.is-hidden]="!historyVisible">
+      <p class="sub-label">Operation History</p>
+      <p class="history-message">{{ historyMessage }}</p>
+      <ul class="history-list">
+        <li *ngFor="let entry of historyEntries" class="history-item" [class.is-error]="entry.isError">
+          <div class="history-top">
+            <span>{{ formatTimestamp(entry.createdAt) }}</span>
+            <span>{{ entry.isError ? 'Error' : 'Success' }}</span>
+          </div>
+          <div>{{ entry.description || '-' }}</div>
+          <div *ngIf="entry.errorMessage" class="history-error">{{ entry.errorMessage }}</div>
+        </li>
+      </ul>
+    </section>
+
+    <p class="message">{{ message }}</p>
+  </section>
+</main>

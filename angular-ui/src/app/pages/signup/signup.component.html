@@ -1,0 +1,44 @@
+<main class="auth-page">
+  <section class="auth-card">
+    <h1>Create Account</h1>
+    <p class="auth-sub">Register to store measurement history securely.</p>
+
+    <label for="name">Name</label>
+    <input
+      id="name"
+      type="text"
+      placeholder="Your name"
+      autocomplete="name"
+      [(ngModel)]="name"
+      name="name"
+    />
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+      [(ngModel)]="email"
+      name="email"
+    />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      placeholder="Create password"
+      autocomplete="new-password"
+      [(ngModel)]="password"
+      name="password"
+    />
+
+    <button class="cta" type="button" (click)="signup()">Sign Up</button>
+    <p class="message">{{ authMessage }}</p>
+
+    <div class="auth-links">
+      <a routerLink="/login">Already have an account</a>
+      <a routerLink="/">Back to app</a>
+    </div>
+  </section>
+</main>
