@@ -417,6 +417,45 @@ select:focus {
 	text-decoration: none;
 }
 
+.auth-divider {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0.85rem 0 0.65rem;
+	color: #7c8598;
+	font-size: 0.85rem;
+}
+
+.auth-divider span {
+	position: relative;
+	padding: 0 0.6rem;
+}
+
+.auth-divider span::before,
+.auth-divider span::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	width: 70px;
+	height: 1px;
+	background: #d6dbea;
+}
+
+.auth-divider span::before {
+	right: 100%;
+}
+
+.auth-divider span::after {
+	left: 100%;
+}
+
+#googleLoginButton,
+#googleSignupButton {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.45rem;
+}
+
 @keyframes fadeSlide {
 	from {
 		opacity: 0;

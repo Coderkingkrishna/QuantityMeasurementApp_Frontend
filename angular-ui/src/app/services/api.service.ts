@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 interface ApiConfig {
   apiBaseUrl: string;
   endpoints: Record<string, string>;
+  googleClientId?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,7 @@ export class ApiService {
     endpoints: {
       signup: '/api/auth/signup',
       login: '/api/auth/login',
+      google: '/api/auth/google',
       logout: '/api/auth/logout',
       convert: '/api/quantitymeasurement/convert',
       compare: '/api/quantitymeasurement/compare',
@@ -19,7 +21,8 @@ export class ApiService {
       subtract: '/api/quantitymeasurement/subtract',
       divide: '/api/quantitymeasurement/divide',
       history: '/api/quantitymeasurement/history'
-    }
+    },
+    googleClientId: ''
   };
 
   private configPromise?: Promise<ApiConfig>;
