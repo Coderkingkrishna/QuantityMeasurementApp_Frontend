@@ -1,4 +1,10 @@
-{
+export interface AppConfig {
+  apiBaseUrl: string;
+  endpoints: Record<string, string>;
+  googleClientId?: string;
+}
+
+export const APP_CONFIG: AppConfig = {
   "apiBaseUrl": "https://quantitymeasurementapp-3gp7.onrender.com",
   "endpoints": {
     "signup": "/api/auth/signup",
@@ -13,4 +19,4 @@
     "history": "/api/quantitymeasurement/history"
   },
   "googleClientId": "847049791626-2jedkuhfv47kira6365da9t97v8714rd.apps.googleusercontent.com"
-}
+};

@@ -1,39 +1,16 @@
 import { Injectable } from '@angular/core';
-
-interface ApiConfig {
-  apiBaseUrl: string;
-  endpoints: Record<string, string>;
-  googleClientId?: string;
-}
+import { APP_CONFIG } from '../app-config.generated';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private readonly defaultConfig: ApiConfig = {
-    apiBaseUrl: '',
-    endpoints: {
-      signup: '/api/auth/signup',
-      login: '/api/auth/login',
-      google: '/api/auth/google',
-      logout: '/api/auth/logout',
-      convert: '/api/quantitymeasurement/convert',
-      compare: '/api/quantitymeasurement/compare',
-      add: '/api/quantitymeasurement/add',
-      subtract: '/api/quantitymeasurement/subtract',
-      divide: '/api/quantitymeasurement/divide',
-      history: '/api/quantitymeasurement/history'
-    },
-    googleClientId: ''
-  };
-
-  private configPromise?: Promise<ApiConfig>;
+  private readonly config = APP_CONFIG;
   private activeBaseUrl = '';
 
   async request<T>(
     endpointKey: string,
     options: { method?: string; body?: unknown; requiresAuth?: boolean } = {}
   ): Promise<T> {
-    const config = await this.loadConfig();
-    const endpoint = config.endpoints[endpointKey];
+    const endpoint = this.config.endpoints[endpointKey];
 
     if (!endpoint) {
       throw new Error(`Endpoint key ${endpointKey} is not configured.`);
@@ -52,7 +29,7 @@ export class ApiService {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const baseCandidates = this.getBaseUrlCandidates(this.activeBaseUrl || config.apiBaseUrl);
+    const baseCandidates = this.getBaseUrlCandidates(this.activeBaseUrl || this.config.apiBaseUrl);
 
     if (!baseCandidates.length) {
       throw new Error('API base URL is not configured. Set API_BASE_URL in .env and run npm start or npm run build.');
@@ -93,21 +70,6 @@ export class ApiService {
     }
 
     return payload as T;
-  }
-
-  private async loadConfig(): Promise<ApiConfig> {
-    if (!this.configPromise) {
-      this.configPromise = fetch('data/app-config.json')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Unable to load app-config.json');
-          }
-          return response.json() as Promise<ApiConfig>;
-        })
-        .catch(() => this.defaultConfig);
-    }
-
-    return this.configPromise;
   }
 
   private getBaseUrlCandidates(configuredBaseUrl: string): string[] {
