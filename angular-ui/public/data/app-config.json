@@ -1,0 +1,16 @@
+{
+  "apiBaseUrl": "https://quantitymeasurementapp-3gp7.onrender.com",
+  "endpoints": {
+    "signup": "/api/auth/signup",
+    "login": "/api/auth/login",
+    "google": "/api/auth/google",
+    "logout": "/api/auth/logout",
+    "convert": "/api/quantitymeasurement/convert",
+    "compare": "/api/quantitymeasurement/compare",
+    "add": "/api/quantitymeasurement/add",
+    "subtract": "/api/quantitymeasurement/subtract",
+    "divide": "/api/quantitymeasurement/divide",
+    "history": "/api/quantitymeasurement/history"
+  },
+  "googleClientId": "847049791626-2jedkuhfv47kira6365da9t97v8714rd.apps.googleusercontent.com"
+}

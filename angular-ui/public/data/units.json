@@ -1,0 +1,13 @@
+{
+  "categories": {
+    "Length": ["Feet", "Inches", "Yards", "Centimeters"],
+    "Weight": ["Kilogram", "Gram", "Pound"],
+    "Volume": ["Litre", "Millilitre", "Gallon"],
+    "Temperature": ["Celsius", "Fahrenheit", "Kelvin"]
+  },
+  "arithmeticOperators": [
+    { "label": "Add (+)", "value": "add" },
+    { "label": "Subtract (-)", "value": "subtract" },
+    { "label": "Divide (/)", "value": "divide" }
+  ]
+}
