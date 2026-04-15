@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: angular-ui
+    env: static
+    buildCommand: cd angular-ui && npm install && npx ng build --configuration production
+    staticPublishPath: angular-ui/dist/angular-ui
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
