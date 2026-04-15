@@ -9,7 +9,7 @@ interface ApiConfig {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly defaultConfig: ApiConfig = {
-    apiBaseUrl: 'http://localhost:5105',
+    apiBaseUrl: '',
     endpoints: {
       signup: '/api/auth/signup',
       login: '/api/auth/login',
@@ -53,6 +53,10 @@ export class ApiService {
     }
 
     const baseCandidates = this.getBaseUrlCandidates(this.activeBaseUrl || config.apiBaseUrl);
+
+    if (!baseCandidates.length) {
+      throw new Error('API base URL is not configured. Set API_BASE_URL in .env and run npm start or npm run build.');
+    }
 
     let response: Response | null = null;
     let networkError: unknown;
@@ -117,6 +121,10 @@ export class ApiService {
 
     pushUnique(configuredBaseUrl);
 
+    if (!configuredBaseUrl) {
+      return candidates;
+    }
+
     try {
       const parsed = new URL(configuredBaseUrl);
       const isLocalhost = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1';
@@ -124,16 +132,6 @@ export class ApiService {
       if (isLocalhost) {
         const flippedProtocol = parsed.protocol === 'https:' ? 'http:' : 'https:';
         pushUnique(`${flippedProtocol}//${parsed.host}`);
-
-        if (parsed.port === '5105') {
-          pushUnique('https://localhost:7137');
-          pushUnique('http://localhost:5105');
-        }
-
-        if (parsed.port === '7137') {
-          pushUnique('http://localhost:5105');
-          pushUnique('https://localhost:7137');
-        }
       }
     } catch {
       // Keep only configured URL if parsing fails.

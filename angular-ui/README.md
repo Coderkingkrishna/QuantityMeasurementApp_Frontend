@@ -12,6 +12,23 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Environment configuration
+
+This app generates `public/data/app-config.json` from `.env` before `start`, `build`, `watch`, and `test`.
+
+Create your local environment file:
+
+```bash
+cp .env.example .env
+```
+
+Set these variables in `.env`:
+
+```text
+API_BASE_URL=http://localhost:5105
+GOOGLE_CLIENT_ID=
+```
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
@@ -44,13 +61,7 @@ Use these settings:
 
 - Build command: `npm install && npm run build`
 - Publish directory: `dist/angular-ui/browser`
-- Environment: no build-time API variable is required because the frontend reads `public/data/app-config.json`
-
-The production API URL is already configured to:
-
-```text
-https://quantitymeasurementapp-3gp7.onrender.com
-```
+- Environment: provide `API_BASE_URL` (and optionally `GOOGLE_CLIENT_ID`) as environment variables for the build
 
 If your hosting provider needs an SPA fallback, route all unknown paths to `index.html` so `/login` and `/signup` continue to work on refresh.
 

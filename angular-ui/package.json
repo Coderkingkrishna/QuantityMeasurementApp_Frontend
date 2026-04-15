@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "generate:config": "node scripts/generate-app-config.mjs",
+    "prestart": "npm run generate:config",
     "start": "ng serve",
+    "prebuild": "npm run generate:config",
     "build": "ng build",
+    "prewatch": "npm run generate:config",
     "watch": "ng build --watch --configuration development",
+    "pretest": "npm run generate:config",
     "test": "ng test"
   },
   "private": true,
@@ -32,6 +37,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "dotenv": "^16.4.5",
     "typescript": "~5.7.2"
   }
 }
