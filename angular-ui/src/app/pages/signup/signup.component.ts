@@ -2,12 +2,9 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { APP_CONFIG } from '../../app-config.generated';
 import { ApiService } from '../../services/api.service';
 import { AuthResponse, AuthService } from '../../services/auth.service';
-
-interface AppConfig {
-  googleClientId?: string;
-}
 
 interface GoogleCredentialResponse {
   credential: string;
@@ -76,15 +73,7 @@ export class SignupComponent implements AfterViewInit {
   }
 
   private async initializeGoogleAuth(): Promise<void> {
-    const config = await fetch('data/app-config.json').then((response) => {
-      if (!response.ok) {
-        throw new Error('Unable to load app-config.json');
-      }
-
-      return response.json() as Promise<AppConfig>;
-    });
-
-    this.googleClientId = config.googleClientId?.trim() || '';
+    this.googleClientId = APP_CONFIG.googleClientId?.trim() || '';
     if (!this.googleClientId) {
       return;
     }
