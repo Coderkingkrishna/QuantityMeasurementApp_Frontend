@@ -36,6 +36,24 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## Deploying To Render
+
+This app is ready to deploy as a static site on Render.
+
+Use these settings:
+
+- Build command: `npm install && npm run build`
+- Publish directory: `dist/angular-ui/browser`
+- Environment: no build-time API variable is required because the frontend reads `public/data/app-config.json`
+
+The production API URL is already configured to:
+
+```text
+https://quantitymeasurementapp-3gp7.onrender.com
+```
+
+If your hosting provider needs an SPA fallback, route all unknown paths to `index.html` so `/login` and `/signup` continue to work on refresh.
+
 ## Running unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:

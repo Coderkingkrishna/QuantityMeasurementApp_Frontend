@@ -1,5 +1,5 @@
 {
-  "apiBaseUrl": "https://localhost:5105",
+  "apiBaseUrl": "https://quantitymeasurementapp-3gp7.onrender.com",
   "endpoints": {
     "signup": "/api/auth/signup",
     "login": "/api/auth/login",
