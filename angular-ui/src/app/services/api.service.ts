@@ -25,7 +25,7 @@ export class ApiService {
       throw new Error('Please login first.');
     }
 
-    if (token) {
+    if (options.requiresAuth && token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
 

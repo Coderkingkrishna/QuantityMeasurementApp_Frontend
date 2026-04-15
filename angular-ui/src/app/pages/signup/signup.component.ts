@@ -86,14 +86,18 @@ export class SignupComponent implements AfterViewInit {
       return;
     }
 
-    googleApi.accounts.id.initialize({
-      client_id: this.googleClientId,
-      callback: (response: GoogleCredentialResponse) => {
-        this.handleGoogleCredential(response).catch(() => {
-          this.authMessage = 'Google login failed.';
-        });
-      }
-    });
+    const globalScope = window as any;
+    if (!globalScope.__qmGoogleInitialized) {
+      googleApi.accounts.id.initialize({
+        client_id: this.googleClientId,
+        callback: (response: GoogleCredentialResponse) => {
+          this.handleGoogleCredential(response).catch(() => {
+            this.authMessage = 'Google login failed.';
+          });
+        }
+      });
+      globalScope.__qmGoogleInitialized = true;
+    }
 
     googleApi.accounts.id.renderButton(googleButton, {
       theme: 'outline',
